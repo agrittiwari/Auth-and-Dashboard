@@ -9,7 +9,10 @@ connectDB();
 
 
 //parsing data
-app.use(express.json({extended: false}))
+app.use(express.json({ extended: false }))
+
+//addressing Routes
+app.use('/register', require('./Routes/User'))
 
 
 app.get('/', (req, res) =>

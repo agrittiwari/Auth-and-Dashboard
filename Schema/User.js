@@ -13,17 +13,15 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     email: {
-        type: email,
-        required: true
+        type: String,
+        required: true,
+        unique:true
     },
     password: {
         type: String,
         required: true
     },
-    password2: {
-        type: String,
-        required: true
-    }
+   
 })
 
 module.exports = mongoose.model("User", UserSchema)
