@@ -1113,6 +1113,18 @@
   "resolved" "https://registry.npmjs.org/negotiator/-/negotiator-0.6.2.tgz"
   "version" "0.6.2"
 
+"node-mailer@^0.1.1":
+  "integrity" "sha1-YJ4UqbLDRCJUCzpmk4Fj0dJCFQA="
+  "resolved" "https://registry.npmjs.org/node-mailer/-/node-mailer-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "nodemailer" ">= 0.1.15"
+
+"nodemailer@>= 0.1.15":
+  "integrity" "sha512-1xzFN3gqv+/qJ6YRyxBxfTYstLNt0FCtZaFRvf4Sg9wxNGWbwFmGXVpfSi6ThGK6aRxAo+KjHtYSW8NvCsNSAg=="
+  "resolved" "https://registry.npmjs.org/nodemailer/-/nodemailer-6.6.1.tgz"
+  "version" "6.6.1"
+
 "nodemon@^2.0.7":
   "integrity" "sha512-XHzK69Awgnec9UzHr1kc8EomQh4sjTQ8oRf8TsGrSmHDx9/UmiGG9E/mM3BuTfNeFwdNBvrqQq/RHL0xIeyFOA=="
   "resolved" "https://registry.npmjs.org/nodemon/-/nodemon-2.0.7.tgz"

@@ -2,6 +2,12 @@ const express = require('express');
 const app = express()
 const path= require('path')
 
+const connectDB = require('./config/db')
+
+//Connecting databse
+connectDB();
+
+
 //parsing data
 app.use(express.json({extended: false}))
 
