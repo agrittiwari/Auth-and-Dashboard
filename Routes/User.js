@@ -1,13 +1,26 @@
 const express = require('express')
 const router = express.Router()
 const User =require('../Schema/User')
-const {check, validateResult}= require('express-validator')
+const {check, validationResult}= require('express-validator')
 
 
 //Register User
-router.post('/', async (req, res) =>
+router.post('/', [
+    check("firstName", " First Name is required").notEmpty(),
+    check("lastName", " Last Name is required").notEmpty(),
+    check("username", " Username is required. It must be unique").notEmpty(),
+    check("email" ," Email is required").isEmail(),
+    check("password", " Password is required"),
+    check("passwordConfirmation" ," Confirm password is required. It should be same as password").custom((value, {req}) => { value === req.body.password })
+
+
+], async (req, res) =>
 {
-    const {firstName, lastName, username, email, password}= req.body
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        res.status(400).json({errors :errors.array()})
+    }
+    const { firstName, lastName, username, email, password, passwordConfirmation } = req.body
 
     try {
         let user = await User.findOne({email}) 
@@ -20,14 +33,14 @@ router.post('/', async (req, res) =>
             res.status(400).json({msg :"username already taken"})
         }
     
-      
-        if (!user || !usernameCheck) {
+        if ((!user || !username  )&& password != passwordConfirmation  ) {
             user = new User({
                 firstName,
                 lastName,
                 username,
                 email,
                 password,
+                passwordConfirmation
 
             })
         }
