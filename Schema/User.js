@@ -21,7 +21,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    passwordConfirmation: {
+    password2: {
         type: String,
         required: true
     },
