@@ -4,6 +4,7 @@ const User =require('../Schema/User')
 const { check, validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const config = require('config')
 
 
 //Register User
@@ -63,23 +64,38 @@ router.post('/', [
         const salt = await bcrypt.genSalt(10)
         user.password = await bcrypt.hash(password, salt)
         user.password2 = await bcrypt.hash(password2, salt)
-        console.log(password)
+      
         //saving it into database
         await user.save();
 
         //generating jwt for authentication
-// const payload ={
-//     user: {
-//         id: user._id
-//     }
-// }
+const payload ={
+    user: {
+        id: user._id
+    }
+        }
+        
+        jwt.sign(payload, config.get("jwtsecret1"), {
+            expiresIn: 360000,
+        }, (err, token1) =>
+        {
+            if (err) throw err;
+            res.json({token1})
+        })
 
         //generating jwt for nodemail verify email
 
 
+        jwt.sign(payload, config.get("jwtsecret2"), {
+            expiresIn: 360000,
+        }, (err, token2) =>
+        {
+            if (err) throw err;
+            res.json({token2})
+        })
 
         
-        res.json(user)
+        
     } catch (err) {
         console.error(err.message)
     }
